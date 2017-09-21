@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+
+import ControlBar from './ControlBar'
 import Cell from './Cell'
 
 class Minesweeper extends Component {
@@ -104,6 +106,7 @@ class Minesweeper extends Component {
 
     return (
       <div>
+        <ControlBar/>
         <div>
           { 
             this.state.table.map(row => {

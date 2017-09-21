@@ -4,11 +4,17 @@
   height: 30px;
   border: 1px solid white;
   vertical-align: top;
+  transition: all 0.2s;
+}
+
+.cell:hover {
+  background-color: #BDBDBD;
 }
 
 .close {
   background-color: #E0E0E0;
 }
+
 
 .open {
   background-color: #9E9E9E;
