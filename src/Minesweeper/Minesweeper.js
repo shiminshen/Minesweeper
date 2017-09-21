@@ -44,7 +44,7 @@ class Minesweeper extends Component {
     // update values
     for( let y = 0 ; y < rowNum ; ++y) {
       for( let x = 0 ; x < colNum ; ++x) {
-        table[y][x].value = this.countMines(table[y][x], table)
+        table[y][x].value = table[y][x].value === -1 ? -1 : this.countMines(table[y][x], table)
       }
     }
     
