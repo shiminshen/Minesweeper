@@ -117,11 +117,23 @@ class Minesweeper extends Component {
 
   }
 
+  changeConfig = (name, value) => this.setState({ [name]: value })
+
   render() {
+
+    let {
+      rowNum,
+      colNum,
+      mineNum
+    } = this.state;
 
     return (
       <div>
         <ControlBar
+          rowNum={rowNum}
+          colNum={colNum}
+          mineNum={mineNum}
+          handleChangeConfig={this.changeConfig}
           handleReset={this.reset}
         />
         <Table
