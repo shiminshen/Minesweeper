@@ -12,6 +12,7 @@ class Minesweeper extends Component {
       rowNum: 20,
       colNum: 20,
       mineNum: 20,
+      gameOver: 0,
       table: []
     };
   }
@@ -115,7 +116,12 @@ class Minesweeper extends Component {
       }
     }
 
-    this.setState({ table })
+    let gameOver = this.checkOver()
+
+    this.setState({ 
+      table,
+      gameOver
+    })
 
   }
 
@@ -128,13 +134,56 @@ class Minesweeper extends Component {
       cell.hasFlag = !cell.hasFlag
     }
 
-    this.setState({ table })
+    let gameOver = this.checkOver()
+    this.setState({ 
+      table,
+      gameOver
+    })
 
+  }
+
+  checkOver = () => {
+
+    let {
+      rowNum,
+      colNum,
+      mineNum,
+      table
+    } = this.state;
+
+    // check losing
+    for( let y = 0 ; y < rowNum ; ++y) {
+      for( let x = 0 ; x < colNum ; ++x) {
+        let cell = table[y][x]
+        if (cell.value === -1 && cell.isOpen) {
+          return -1
+        }
+      }
+    }
+
+    // check winning
+    for( let y = 0 ; y < rowNum ; ++y) {
+      for( let x = 0 ; x < colNum ; ++x) {
+        let cell = table[y][x]
+        if (cell.hasFlag && cell.value > -1) {
+          return 0
+        }
+
+        if (!cell.hasFlag && cell.value === -1) {
+          return 0
+        }
+      }
+    }
+
+    return 1
   }
 
   changeConfig = (name, value) => this.setState({ [name]: value })
 
-  reset = () => this.setState({ table: this.createTable() })
+  reset = () => this.setState({ 
+    table: this.createTable(),
+    gameOver: 0
+  })
 
   render() {
 
