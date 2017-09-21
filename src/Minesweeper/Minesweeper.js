@@ -9,8 +9,8 @@ class Minesweeper extends Component {
     super(props);
   
     this.state = {
-      rowNum: 10,
-      colNum: 10,
+      rowNum: 20,
+      colNum: 20,
       mineNum: 20,
       table: []
     };
