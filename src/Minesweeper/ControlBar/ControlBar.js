@@ -6,9 +6,13 @@ import './ControlBar.css'
 class ControlBar extends Component {
 
   render() {
+    let {
+      handleReset
+    } = this.props;
+
     return (
       <div className='control-bar'>
-        <Button raised>
+        <Button raised onClick={handleReset}>
           Reset
         </Button>
       </div>

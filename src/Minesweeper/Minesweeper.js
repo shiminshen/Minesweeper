@@ -73,6 +73,8 @@ class Minesweeper extends Component {
     return mineCount
   }
 
+  reset = () => this.setState({ table: this.createTable({rowNum: 10, colNum: 10, mineNum: 10})})
+
   open = ({x, y}) => {
 
     let table = [...this.state.table]
@@ -99,14 +101,15 @@ class Minesweeper extends Component {
 
     this.setState({ table })
 
-
   }
 
   render() {
 
     return (
       <div>
-        <ControlBar/>
+        <ControlBar
+          handleReset={this.reset}
+        />
         <div>
           { 
             this.state.table.map(row => {
