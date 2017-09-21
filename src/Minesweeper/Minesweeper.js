@@ -87,12 +87,14 @@ class Minesweeper extends Component {
     return mineCount
   }
 
-  reset = () => this.setState({ table: this.createTable() })
-
-  open = ({x, y}) => {
+  open = ({ x, y }) => {
 
     let table = [...this.state.table]
     let cell = table[y][x]
+
+    if (cell.hasFlag) {
+      return
+    }
 
     // open this cell
     if (!cell.isOpen) {
@@ -117,7 +119,22 @@ class Minesweeper extends Component {
 
   }
 
+  setFlag = ({ x, y }) => e => {
+    e.preventDefault();
+    let table = [...this.state.table]
+    let cell = table[y][x]
+
+    if (!cell.isOpen) {
+      cell.hasFlag = !cell.hasFlag
+    }
+
+    this.setState({ table })
+
+  }
+
   changeConfig = (name, value) => this.setState({ [name]: value })
+
+  reset = () => this.setState({ table: this.createTable() })
 
   render() {
 
@@ -138,6 +155,7 @@ class Minesweeper extends Component {
         />
         <Table
           open={this.open}
+          setFlag={this.setFlag}
           table={this.state.table}
         />
       </div>

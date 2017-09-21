@@ -7,20 +7,23 @@ class Table extends Component {
   render() {
     let {
       table,
-      open
+      open,
+      setFlag
     }= this.props;
 
     return (
       <div>
         { 
-          table.map(row => {
+          table.map((row, rIdx)=> {
 
             return (
-              <div>
+              <div key={rIdx}>
                 { 
                   row.map(cell => (<Cell 
                     {...cell}
+                    key={cell.x}
                     handleClick={open}
+                    handleContextMenu={setFlag}
                   />))
                 }
               </div>
