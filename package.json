@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://shiminshen.github.io/Minesweeper",
   "dependencies": {
+    "font-awesome": "^4.7.0",
     "gh-pages": "^1.0.0",
     "material-ui": "^1.0.0-beta.11",
     "react": "^15.6.1",

@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
+import '../../../../node_modules/font-awesome/css/font-awesome.min.css'
 import './Cell.css'
 
 class Cell extends Component {
+
+  showValue() {
+
+  }
 
   render() {
     let {
@@ -18,7 +23,7 @@ class Cell extends Component {
 
     return (
       <div className={ `cell ${classType}` } onClick={() => handleClick({x, y})} onContextMenu={handleContextMenu({x, y})}>
-        {hasFlag ? 'f': isOpen ? value : ''}
+        {hasFlag ? (<i className="fa fa-flag" aria-hidden="true"></i>) : !isOpen ? '' : value === -1 ? (<i className="fa fa-bomb" aria-hidden="true"></i>) : value }
       </div>
     );
   }
