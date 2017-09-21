@@ -5,12 +5,18 @@ class Cell extends Component {
   
   render() {
     let {
-      value
+      x,
+      y,
+      isOpen,
+      value,
+      handleClick
     } = this.props;
 
+    let classType = isOpen ? 'open' : 'close'
+
     return (
-      <div className='cell'>
-        {value}
+      <div className={ `cell ${classType}` } onClick={() => handleClick({x, y})}>
+        {isOpen ? value : ''}
       </div>
     );
   }

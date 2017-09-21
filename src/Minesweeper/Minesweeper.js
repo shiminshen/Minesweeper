@@ -48,7 +48,6 @@ class Minesweeper extends Component {
       }
     }
     
-
     return table
   }
 
@@ -59,11 +58,9 @@ class Minesweeper extends Component {
       y
     } = cell;
 
-    console.log(this)
-
     let mineCount = 0
-    for (var rowOffset = -1 ; rowOffset <= 1 ; ++rowOffset) {
-      for (var colOffset = -1 ; colOffset <= 1 ; ++colOffset) {
+    for (let rowOffset = -1 ; rowOffset <= 1 ; ++rowOffset) {
+      for (let colOffset = -1 ; colOffset <= 1 ; ++colOffset) {
         let newX = x+colOffset
         let newY = y+rowOffset
         if (newX > -1 && newY > -1 && newX < table[0].length && newY < table.length && table[newY][newX].value === -1) {
@@ -74,24 +71,56 @@ class Minesweeper extends Component {
     return mineCount
   }
 
+  open = ({x, y}) => {
+
+    let table = [...this.state.table]
+    let cell = table[y][x]
+
+    // open this cell
+    if (!cell.isOpen) {
+      cell.isOpen = true
+    } 
+
+    // open around if the value is 0
+    if (cell.value === 0) {
+
+      for (let rowOffset = -1 ; rowOffset <= 1 ; ++rowOffset) {
+        for (let colOffset = -1 ; colOffset <= 1 ; ++colOffset) {
+          let newX = x+colOffset
+          let newY = y+rowOffset
+          if (newX > -1 && newY > -1 && newX < table[0].length && newY < table.length && table[newY][newX].value !== -1 && !table[newY][newX].isOpen) {
+            this.open({ x: newX, y: newY })
+          }
+        }
+      }
+    }
+
+    this.setState({ table })
+
+
+  }
+
   render() {
 
     return (
       <div>
-        { 
-          this.state.table.map(row => {
-
-            return (
-              <div>
-                { 
-                  row.map(cell => (<Cell 
-                    {...cell}
-                  />))
-              }
-            </div>
-            )
-          })
-        }
+        <div>
+          { 
+            this.state.table.map(row => {
+          
+              return (
+                <div>
+                  { 
+                    row.map(cell => (<Cell 
+                      {...cell}
+                      handleClick={this.open}
+                    />))
+                }
+              </div>
+              )
+            })
+          }
+        </div>
       </div>
     );
   }
