@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import ControlBar from './ControlBar'
-import Cell from './Cell'
+import Table from './Table'
 
 class Minesweeper extends Component {
 
@@ -9,14 +9,28 @@ class Minesweeper extends Component {
     super(props);
   
     this.state = {
-      table: this.createTable({rowNum: 10, colNum: 10, mineNum: 10})
+      rowNum: 10,
+      colNum: 10,
+      mineNum: 20,
+      table: []
     };
   }
 
-  createTable = ({ rowNum, colNum, mineNum }) => {
+  componentDidMount() {
+    this.setState({
+      table: this.createTable({rowNum: 10, colNum: 10, mineNum: 20})
+    })
+  }
+
+  createTable = () => {
+
+    let {
+      rowNum,
+      colNum,
+      mineNum
+    } = this.state;
 
     let table = []
-
     // initialize the table
     for( let y = 0 ; y < rowNum ; ++y) {
       let row = []
@@ -73,7 +87,7 @@ class Minesweeper extends Component {
     return mineCount
   }
 
-  reset = () => this.setState({ table: this.createTable({rowNum: 10, colNum: 10, mineNum: 10})})
+  reset = () => this.setState({ table: this.createTable() })
 
   open = ({x, y}) => {
 
@@ -110,23 +124,10 @@ class Minesweeper extends Component {
         <ControlBar
           handleReset={this.reset}
         />
-        <div>
-          { 
-            this.state.table.map(row => {
-          
-              return (
-                <div>
-                  { 
-                    row.map(cell => (<Cell 
-                      {...cell}
-                      handleClick={this.open}
-                    />))
-                }
-              </div>
-              )
-            })
-          }
-        </div>
+        <Table
+          open={this.open}
+          table={this.state.table}
+        />
       </div>
     );
   }

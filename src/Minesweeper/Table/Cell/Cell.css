@@ -3,6 +3,7 @@
   width: 30px;
   height: 30px;
   border: 1px solid white;
+  line-height: 30px;
   vertical-align: top;
   transition: all 0.2s;
 }
