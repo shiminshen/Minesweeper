@@ -2,6 +2,13 @@ import React, { Component } from 'react';
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
 
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from 'material-ui/Dialog';
+
 
 import './ControlBar.css'
 
@@ -16,7 +23,9 @@ class ControlBar extends Component {
       rowNum,
       colNum,
       mineNum,
-      handleReset,
+      gameOver,
+      handleRestart,
+      restart
     } = this.props;
 
     return (
@@ -36,9 +45,15 @@ class ControlBar extends Component {
           value={mineNum}
           onChange={this.handleInputChange('mineNum')}
         />
-        <Button raised onClick={handleReset}>
-          Reset
+        <Button color='accent' onClick={handleRestart}>
+          Restart
         </Button>
+        <Dialog open={gameOver}>
+          <DialogTitle>You {gameOver === 1 ? 'Win' : 'Lose'}</DialogTitle>
+          <Button color='accent' onClick={handleRestart}>
+            Restart
+          </Button>
+        </Dialog>
       </div>
     );
   }

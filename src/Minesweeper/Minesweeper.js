@@ -180,7 +180,7 @@ class Minesweeper extends Component {
 
   changeConfig = (name, value) => this.setState({ [name]: value })
 
-  reset = () => this.setState({ 
+  restart = () => this.setState({ 
     table: this.createTable(),
     gameOver: 0
   })
@@ -190,7 +190,8 @@ class Minesweeper extends Component {
     let {
       rowNum,
       colNum,
-      mineNum
+      mineNum,
+      gameOver
     } = this.state;
 
     return (
@@ -199,8 +200,9 @@ class Minesweeper extends Component {
           rowNum={rowNum}
           colNum={colNum}
           mineNum={mineNum}
+          gameOver={gameOver}
           handleChangeConfig={this.changeConfig}
-          handleReset={this.reset}
+          handleRestart={this.restart}
         />
         <Table
           open={this.open}
