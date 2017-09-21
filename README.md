@@ -6,5 +6,5 @@ Minesweeper written by React
 Development
 ---
 
-  npm start
+    npm start
 
