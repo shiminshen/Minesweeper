@@ -9,8 +9,8 @@ class Minesweeper extends Component {
     super(props);
   
     this.state = {
-      rowNum: 20,
-      colNum: 20,
+      rowNum: 10,
+      colNum: 10,
       mineNum: 20,
       gameOver: 0,
       table: []
@@ -19,7 +19,7 @@ class Minesweeper extends Component {
 
   componentDidMount() {
     this.setState({
-      table: this.createTable({rowNum: 10, colNum: 10, mineNum: 20})
+      table: this.createTable()
     })
   }
 
@@ -28,8 +28,33 @@ class Minesweeper extends Component {
     let {
       rowNum,
       colNum,
-      mineNum
+      mineNum,
     } = this.state;
+
+
+    try {
+
+      if (rowNum < 0 || colNum < 0) {
+        throw Error('Invalid config')
+      }
+
+      if ((rowNum * colNum) < mineNum) {
+        throw Error('Invalid config')
+      }
+      
+    } catch (e) {
+      /* handle error */
+      rowNum = 10
+      colNum = 10
+      mineNum = 20
+      this.setState({
+        rowNum,
+        colNum,
+        mineNum
+      })
+    }
+
+      
 
     let table = []
     // initialize the table
@@ -147,7 +172,6 @@ class Minesweeper extends Component {
     let {
       rowNum,
       colNum,
-      mineNum,
       table
     } = this.state;
 

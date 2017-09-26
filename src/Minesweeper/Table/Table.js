@@ -11,6 +11,7 @@ class Table extends Component {
       setFlag
     }= this.props;
 
+    console.log(table)
     return (
       <div>
         { 

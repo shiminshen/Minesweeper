@@ -3,9 +3,6 @@ import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
 
 import Dialog, {
-  DialogActions,
-  DialogContent,
-  DialogContentText,
   DialogTitle,
 } from 'material-ui/Dialog';
 
@@ -25,7 +22,6 @@ class ControlBar extends Component {
       mineNum,
       gameOver,
       handleRestart,
-      restart
     } = this.props;
 
     return (
